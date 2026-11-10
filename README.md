@@ -24,3 +24,17 @@ curl localhost:8081/actuator/health
 - `*Test.java` → unitários (surefire), rodam em `mvn test`. Ex.: `HelloControllerTest` (MockMvc standalone, sem contexto).
 - `ApplicationTests` → `@SpringBootTest` (smoke: o contexto sobe).
 - Cobertura (JaCoCo): `mvn verify` gera `target/site/jacoco/index.html` e **falha se a cobertura de linhas ficar abaixo de 70%** (propriedade `jacoco.min.coverage` no pom; `Application.class` é excluída).
+
+## App de teste (API de tarefas em memória)
+Serve para validar a esteira de ponta a ponta, sem banco.
+
+| Método | Rota | Resposta |
+|---|---|---|
+| GET | `/hello` | 200 `{"message":"hello"}` |
+| GET | `/tasks` | 200 lista |
+| POST | `/tasks` `{"title":"..."}` | 201 (400 se título vazio ou > 100) |
+| GET | `/tasks/{id}` | 200 / 404 |
+| PUT | `/tasks/{id}/done` | 200 / 404 |
+| DELETE | `/tasks/{id}` | 204 / 404 |
+
+Testes: `TaskServiceTest` (unitário), `TaskControllerTest` (MockMvc com validação e 404), `HelloControllerTest`, `ApplicationTests` (contexto sobe).
