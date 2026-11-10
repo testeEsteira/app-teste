@@ -12,7 +12,9 @@ permissions:
 
 jobs:
   ci:
-    uses: rgizsilva/reusable_workflows/.github/workflows/java-springboot.yml@main
+    uses: jobs:
+  ci:
+    uses: rgizsilva/reusable_worflows/.github/workflows/java-springboot.yml@main
     with:
       java-version: "21"
       ecr-registry: 854209350151.dkr.ecr.us-east-1.amazonaws.com
