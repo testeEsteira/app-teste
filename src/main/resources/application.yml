@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ${APP_NAME:app}
+  threads:
+    virtual:
+      enabled: true          # Java 21: virtual threads
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+server:
+  port: 8080
+  shutdown: graceful         # k8s: termina requisições em andamento
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true        # /actuator/health/liveness e /readiness
+  server:
+    port: 8081               # actuator em porta separada (não expor no ingress)

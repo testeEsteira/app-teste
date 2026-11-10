@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+  id-token: write   # OIDC com a AWS (push no ECR)
+
+jobs:
+  ci:
+    # TROQUE: <org>/<repo-de-workflows> e a versão (@v1)
+    uses: <org>/<repo-de-workflows>/.github/workflows/java-springboot.yml@v1
+    with:
+      java-version: "21"
+      # TROQUE: conta e região do ECR
+      ecr-registry: 123456789012.dkr.ecr.us-east-1.amazonaws.com
+      aws-region: us-east-1
+      platforms: linux/amd64,linux/arm64
+    secrets: inherit   # precisa do secret AWS_ROLE_ARN
