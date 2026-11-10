@@ -1,3 +1,4 @@
+
 name: CI
 
 on:
@@ -11,8 +12,6 @@ permissions:
   id-token: write
 
 jobs:
-  ci:
-    uses: jobs:
   ci:
     uses: rgizsilva/reusable_worflows/.github/workflows/java-springboot.yml@main
     with:
